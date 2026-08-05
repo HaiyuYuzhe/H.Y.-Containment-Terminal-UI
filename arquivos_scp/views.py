@@ -20,6 +20,7 @@ def buscar_entidade(request, designacao):
             'nome_popular': anomalia.nome_popular,
             'classe': anomalia.classe,
             'status_contencao': anomalia.status,
+            'imagem_url': anomalia.imagem_url, # Hahaha Imagens agora
             'procedimentos': anomalia.procedimento_contencao,
             'descricao': anomalia.descricao
         }

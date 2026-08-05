@@ -1,7 +1,6 @@
 from django.db import models
 
 class Entidade(models.Model):
-    # Níveis de classificação inspirados no universo de contenção
     CLASSES_CONTENCAO = [
         ('SAFE', 'Safe - Contenção Estável'),
         ('EUCLID', 'Euclid - Comportamento Imprevisível'),
@@ -15,15 +14,16 @@ class Entidade(models.Model):
         ('DESCONHECIDO', 'Paradeiro Desconhecido'),
     ]
 
-    designacao = models.CharField(max_length=100, verbose_name="Designação (Ex: Item-001)")
+    designacao = models.CharField(max_length=100, verbose_name="Designação")
     nome_popular = models.CharField(max_length=150, verbose_name="Nome de Registro")
     classe = models.CharField(max_length=20, choices=CLASSES_CONTENCAO, default='EUCLID')
     status = models.CharField(max_length=20, choices=STATUS_ATUAL, default='CONTIDO')
     
-    # Textos longos para você escrever a sua narrativa
-    procedimento_contencao = models.TextField(verbose_name="Procedimentos Especiais de Contenção")
-    descricao = models.TextField(verbose_name="Descrição da Anomalia")
+    # NOVA GAVETA: Para armazenar o link da imagem da anomalia
+    imagem_url = models.URLField(max_length=1000, blank=True, null=True, verbose_name="URL da Imagem de Contenção")
     
+    procedimento_contencao = models.TextField(verbose_name="Procedimentos Especiais")
+    descricao = models.TextField(verbose_name="Descrição da Anomalia")
     data_registro = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

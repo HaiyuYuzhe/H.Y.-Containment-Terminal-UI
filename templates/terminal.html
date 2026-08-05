@@ -1,104 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <title>Terminal de Contenção O5</title>
-
-    <!-- Importando o núcleo visual do xterm.js da nuvem -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
-
     <style>
-        /* 1. O ABISMO NEGRO (Fundo e Tipografia) */
         body {
             margin: 0;
             background-color: #050505;
-            /* Preto quase absoluto */
             color: #ffb000;
-            /* O clássico Âmbar de terminais militares */
             font-family: 'Courier New', monospace;
-            /* Fonte monoespaçada de sistema */
             display: flex;
             height: 100vh;
             overflow: hidden;
-            /* Impede a rolagem, prende o usuário na tela */
         }
 
-        /* 2. GEOMETRIA SAGRADA: O Layout Divino */
         #sistema-operacional {
             display: flex;
             width: 100vw;
         }
 
-        /* O Terminal Principal recebe exatamente 61.8% do espaço (Proporção Áurea) */
-        #zona-terminal {
+        /* CORREÇÃO DO VAZAMENTO: O terminal agora respeita estritamente o espaço */
+        #container-terminal {
             width: 61.8vw;
-            padding: 34px;
-            /* Fibonacci: 34px */
+            height: 100vh;
+            padding: 20px 40px 20px 20px; /* Mais espaço na direita para o texto não encostar na linha */
+            box-sizing: border-box;
             box-shadow: inset 0 0 55px rgba(255, 176, 0, 0.05);
-            /* Fibonacci: 55px */
+            display: flex;
+            flex-direction: column;
         }
 
-        /* O Painel Lateral recebe os 38.2% restantes */
+        #zona-terminal {
+            flex: 1;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .xterm-viewport::-webkit-scrollbar { display: none; }
+        .xterm-viewport { -ms-overflow-style: none; scrollbar-width: none; }
+
         #zona-anomalia {
             width: 38.2vw;
             border-left: 1px solid rgba(255, 176, 0, 0.3);
-            padding: 21px;
-            /* Fibonacci: 21px */
+            padding: 34px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
+            box-sizing: border-box;
+            background: linear-gradient(90deg, rgba(255,176,0,0.02) 0%, rgba(0,0,0,0) 100%);
         }
 
-        /* 3. A ESTÉTICA DO SOBRENATURAL */
         h1 {
-            font-size: 55px;
-            /* Fibonacci */
+            font-size: 45px;
             letter-spacing: 8px;
-            /* Fibonacci */
             margin: 0;
             text-transform: uppercase;
             animation: pulsacao-divina 1.618s infinite alternate;
-            /* O tempo do pulso usa o valor de Phi */
-        }
-
-        .texto-sistema {
-            font-size: 13px;
-            /* Fibonacci */
-            line-height: 1.618;
-            /* A altura da linha das letras é regida por Phi */
             text-align: center;
-            color: #885d00;
         }
 
-        /* O Glitch matemático (simulando instabilidade da contenção) */
+        .texto-sistema { font-size: 13px; line-height: 1.618; text-align: center; color: #885d00; }
+
         @keyframes pulsacao-divina {
-            0% {
-                text-shadow: 2px 0 #ff0000, -2px 0 #00ffff;
-                opacity: 0.9;
-            }
-
-            50% {
-                text-shadow: -2px 0 #ff0000, 2px 0 #00ffff;
-                opacity: 1.0;
-            }
-
-            100% {
-                text-shadow: 2px 0 #ffb000, -2px 0 #ffb000;
-                opacity: 0.8;
-            }
+            0% { text-shadow: 2px 0 #ff0000, -2px 0 #00ffff; opacity: 0.9; }
+            50% { text-shadow: -2px 0 #ff0000, 2px 0 #00ffff; opacity: 1.0; }
+            100% { text-shadow: 2px 0 #ffb000, -2px 0 #ffb000; opacity: 0.8; }
         }
+
+        /* VISUALIZADOR DE MÍDIA MILITAR */
+        .janela-documento {
+            width: 100%;
+            border: 1px solid #ffb000;
+            background-color: #0a0a0a;
+            box-shadow: 5px 5px 0px rgba(255, 176, 0, 0.15);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Courier New', monospace;
+            animation: boot-janela 0.3s ease-out;
+            margin-bottom: 20px;
+        }
+        
+        .janela-cabecalho { background-color: #ffb000; color: #050505; padding: 5px 10px; font-weight: bold; display: flex; justify-content: space-between; font-size: 14px; }
+        .janela-corpo { padding: 15px; position: relative; }
+        .carimbo-confidencial { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-15deg); color: rgba(255, 0, 0, 0.7); border: 3px solid rgba(255, 0, 0, 0.7); padding: 5px 15px; font-size: 24px; font-weight: bold; z-index: 10; pointer-events: none; text-shadow: 0 0 5px rgba(255,0,0,0.5); box-shadow: inset 0 0 10px rgba(255,0,0,0.3); }
+        .moldura-midia { border: 1px dashed #555; background: #000; padding: 3px; position: relative; }
+        .moldura-midia img { width: 100%; display: block; filter: grayscale(100%) sepia(100%) hue-rotate(10deg) saturate(300%) contrast(150%); opacity: 0.9; }
+        .metadados-arquivo { margin-top: 15px; border-top: 1px solid #333; padding-top: 10px; font-size: 12px; color: #885d00; line-height: 1.4; }
+        .metadados-arquivo span { color: #ffb000; }
+        @keyframes boot-janela { 0% { transform: scale(0.95); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
     </style>
 </head>
-
 <body>
 
     <div id="sistema-operacional">
-        <!-- Aqui é onde o terminal real será injetado pelo JavaScript -->
-        <div id="zona-terminal"></div>
+        <div id="container-terminal">
+            <div id="zona-terminal"></div>
+        </div>
 
-        <!-- Área lateral para exibir fotos e status das anomalias no futuro -->
         <div id="zona-anomalia">
             <h1>ANOMALIA OS</h1>
             <p class="texto-sistema">
@@ -109,91 +109,68 @@
         </div>
     </div>
 
-    <!-- Importando o motor do xterm.js -->
     <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit/lib/xterm-addon-fit.js"></script>
 
     <script>
-        /* 1. A ENGENHARIA DO XTERM.JS */
         const terminal = new Terminal({
             cursorBlink: true,
             cursorStyle: 'block',
             fontSize: 21,
             fontFamily: 'Courier New',
-            scrollback: 9999, // Guarda até 9999 linhas na memória, permitindo usar a barra de rolagem
-            convertEol: true, // Força a quebra de linha (End Of Line) a funcionar corretamente
-            theme: {
-                background: '#050505',
-                foreground: '#ffb000',
-                cursor: '#ffb000'
-            }
+            scrollback: 9999,
+            convertEol: true,
+            theme: { background: '#050505', foreground: '#ffb000', cursor: '#ffb000' }
         });
 
-        // Plugando o FitAddon para evitar quebra bizarra de palavras
         const fitAddon = new FitAddon.FitAddon();
         terminal.loadAddon(fitAddon);
-
         terminal.open(document.getElementById('zona-terminal'));
 
-        // Força o terminal a calcular a matemática da tela e encaixar o texto
-        fitAddon.fit();
-
-        // Se o usuário redimensionar a janela do navegador, o terminal recalcula
-        window.addEventListener('resize', () => {
+        // O Atraso cirúrgico para forçar o xterm a calcular os limites corretamente
+        setTimeout(() => {
             fitAddon.fit();
-        });
+            terminal.writeln('Iniciando sequência de ancoragem de realidade...');
+            terminal.writeln('\x1b[31m[AVISO] ALINHAMENTO MATEMÁTICO PHI ESTABELECIDO.\x1b[0m');
+            terminal.writeln('Aguardando input do operador (Ex: digite SCP-002)...');
+            terminal.write('\r\n>_ ');
+        }, 100);
 
-        terminal.writeln('Iniciando sequência de ancoragem de realidade...');
+        window.addEventListener('resize', () => { fitAddon.fit(); });
 
-        /* 2. O DESIGN DE SOM (Blindado contra bloqueios do navegador) */
-        let audioCtx; // Começa dormente, sem ativar o sistema
-
+        let audioCtx;
         function iniciarAudio() {
-            if (!audioCtx) {
-                // Só cria o motor de som se ele não existir ainda
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume();
-            }
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
         }
 
         function tocarBipe(freq = 800, tipo = 'sine', duracao = 0.05, volume = 0.1) {
-            if (!audioCtx) return; // Se o áudio não foi iniciado, não faz nada
+            if (!audioCtx) return;
             const oscilador = audioCtx.createOscillator();
             const ganho = audioCtx.createGain();
-
             oscilador.type = tipo;
             oscilador.frequency.value = freq;
-
             ganho.gain.setValueAtTime(volume, audioCtx.currentTime);
             ganho.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duracao);
-
             oscilador.connect(ganho);
             ganho.connect(audioCtx.destination);
-
             oscilador.start();
             oscilador.stop(audioCtx.currentTime + duracao);
         }
 
-        /* 3. O EFEITO MÁQUINA DE ESCREVER */
         let digitando = false;
-
         function maquinaDeEscrever(texto, velocidade, callback) {
             let i = 0;
             digitando = true;
-
             function digitarCaractere() {
                 if (i < texto.length) {
                     let char = texto.charAt(i);
-
                     if (char === '\n') {
                         terminal.write('\r\n');
                     } else {
                         terminal.write(char);
                         if (char !== ' ' && i % 3 === 0) tocarBipe(1200, 'square', 0.02, 0.03);
                     }
-
                     i++;
                     setTimeout(digitarCaractere, velocidade);
                 } else {
@@ -204,24 +181,17 @@
             digitarCaractere();
         }
 
-        /* 4. A SINAPSE COM O BANCO DE DADOS */
         let linhaAtual = '';
-
         terminal.onKey(e => {
             if (digitando) return;
-
-            // O GATILHO: Liga o áudio de forma segura assim que a primeira tecla é pressionada
             iniciarAudio();
-
             const press = e.key;
             const ev = e.domEvent;
-
             tocarBipe(400, 'triangle', 0.03, 0.05);
 
             if (ev.keyCode === 13) {
                 terminal.write('\r\n');
                 const comando = linhaAtual.trim().toUpperCase();
-
                 if (comando === '') {
                     terminal.write('\r\n>_ ');
                     return;
@@ -230,32 +200,81 @@
                 terminal.writeln('\x1b[36m[SISTEMA] INICIANDO VARREDURA POR: ' + comando + '...\x1b[0m');
                 digitando = true;
 
+                // O CÓDIGO FETCH COM A INJEÇÃO DE IMAGENS MILITARES
                 fetch('/api/buscar/' + comando + '/')
                     .then(resposta => resposta.json())
                     .then(dados => {
                         let saida = '';
-
+                        const painelLateral = document.getElementById('zona-anomalia');
+                        
                         if (dados.status === 'sucesso') {
                             tocarBipe(200, 'sawtooth', 0.8, 0.1);
-                            saida += `\r\n\x1b[32m=== ARQUIVO ENCONTRADO ===\x1b[0m\n`;
+                            
+                            if (dados.imagem_url) {
+                                painelLateral.innerHTML = `
+                                    <div class="janela-documento">
+                                        <div class="janela-cabecalho">
+                                            <span>VISUALIZADOR_DE_MÍDIA.EXE</span>
+                                            <span>[X]</span>
+                                        </div>
+                                        <div class="janela-corpo">
+                                            <div class="carimbo-confidencial">CLASSIFICADO // NV 4</div>
+                                            <div class="moldura-midia">
+                                                <img src="${dados.imagem_url}" alt="Registro Visual da Entidade">
+                                            </div>
+                                            <div class="metadados-arquivo">
+                                                <p>ID_ANEXO.......: <span>IMG-${dados.designacao}</span></p>
+                                                <p>DEPARTAMENTO...: <span>PESQUISA E CIÊNCIA APLICADA</span></p>
+                                                <p>ORIGEM_DADOS...: <span>FUNDAÇÃO SCP</span></p>
+                                                <p>DATA_REGISTRO..: <span>[REDIGIDO]</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h1 style="font-size: 30px;">${dados.designacao}</h1>
+                                `;
+                            } else {
+                                painelLateral.innerHTML = `
+                                    <div class="janela-documento" style="border-color: #ff0000;">
+                                        <div class="janela-cabecalho" style="background-color: #ff0000; color: #fff;">
+                                            <span>ERRO_SISTEMA.EXE</span>
+                                            <span>[X]</span>
+                                        </div>
+                                        <div class="janela-corpo">
+                                            <div class="carimbo-confidencial" style="transform: translate(-50%, -50%) rotate(0deg); border: none;">MÍDIA AUSENTE</div>
+                                            <div class="moldura-midia" style="height: 150px; display: flex; align-items: center; justify-content: center; border-color: #ff0000;">
+                                                <span style="color: #ff0000;">[ ARQUIVO CORROMPIDO OU EXPURGADO ]</span>
+                                            </div>
+                                            <div class="metadados-arquivo">
+                                                <p>STATUS_BUSCA...: <span style="color: #ff0000;">FALHA CRÍTICA</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h1 style="font-size: 30px; color: #ff0000;">${dados.designacao}</h1>
+                                `;
+                            }
+
+                            saida += `\r\n\x1b[32m=== ACESSO CONCEDIDO ===\x1b[0m\n`;
                             saida += `\x1b[33mDESIGNACAO:\x1b[0m ${dados.designacao}\n`;
                             saida += `\x1b[33mNOME DE REGISTRO:\x1b[0m ${dados.nome_popular}\n`;
                             saida += `\x1b[33mCLASSE DE CONTENCAO:\x1b[0m ${dados.classe}\n`;
                             saida += `\x1b[33mSTATUS ATUAL:\x1b[0m ${dados.status_contencao}\n\n`;
-                            saida += `\x1b[31m[PROCEDIMENTOS ESPECIAIS DE CONTENCAO]\x1b[0m\n`;
+                            saida += `\x1b[31m[ARQUIVO CONFIDENCIAL]\x1b[0m\n`;
                             saida += `${dados.procedimentos}\n`;
+                            saida += `\n\x1b[32m=== FIM DO ARQUIVO ===\x1b[0m\n`;
+                            
                         } else {
                             tocarBipe(150, 'square', 1.0, 0.2);
                             saida += `\r\n\x1b[31m[ERRO CRITICO] ${dados.mensagem}\x1b[0m\n`;
+                            painelLateral.innerHTML = `<h1 style="color: #ff0000; animation: pulsacao-divina 0.5s infinite alternate;">ACESSO NEGADO</h1>`;
                         }
-
+                        
                         maquinaDeEscrever(saida, 5, () => {
                             linhaAtual = '';
                             terminal.write('\r\n>_ ');
                         });
                     })
                     .catch(erro => {
-                        terminal.writeln('\x1b[31m[FALHA DE COMUNICACAO COM O NUCLEO DO BANCO DE DADOS]\x1b[0m');
+                        terminal.writeln('\r\n\x1b[31m[FALHA DE COMUNICACAO COM O NUCLEO DO BANCO DE DADOS]\x1b[0m');
                         digitando = false;
                         linhaAtual = '';
                         terminal.write('\r\n>_ ');
@@ -273,5 +292,4 @@
         });
     </script>
 </body>
-
 </html>
